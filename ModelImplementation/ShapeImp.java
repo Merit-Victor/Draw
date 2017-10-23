@@ -1,70 +1,58 @@
-package eg.edu.alexu.csd.oop.draw.cs68;
+package eg.edu.alexu.csd.oop.draw.cs26;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.HashMap;
 import java.util.Map;
+
+
+
+
 
 import eg.edu.alexu.csd.oop.draw.Shape;
 
-/**
- * @author Merit Victor
- *
- */
 public class ShapeImp implements Shape {
-
-	/**
-	 * 
-	 */
+	
 	private Point mPosition;
-
-	/**
-	 * 
-	 */
-	private Map<String, Double> mProperties;
-	
-	/**
-	 * 
-	 */
+	private Map<String,Double> mProperties;
 	private Color mOutlineColor;
-	
-	/**
-	 * 
-	 */
 	private Color mFillColor;
+	private Graphics2D canvas;
 	
-	/**
-	 * 
-	 */
-	private Graphics mCanvas;
-	
+	public ShapeImp() {
+		mProperties= new HashMap<String,Double>();
+	}
+
+	  
 	@Override
 	public void setPosition(Point position) {
-		this.mPosition = position;
+		// TODO Auto-generated method stub
+		this.mPosition=position;
 	}
 
 	@Override
 	public Point getPosition() {
+		// TODO Auto-generated method stub
 		return this.mPosition;
 	}
 
 	@Override
 	public void setProperties(Map<String, Double> properties) {
-		this.mProperties = properties;
+	
+		this.mProperties=properties;
+		
 	}
 
 	@Override
-	public Map<String, Double> getProperties() {
-		if (this.mProperties.containsValue(null) 
-				|| this.mProperties.containsKey(null)) {
-			return null;
-		}
+	public Map<String, Double> getProperties() {	
 		return this.mProperties;
 	}
 
 	@Override
 	public void setColor(Color color) {
-		this.mOutlineColor = color;
+		this.mOutlineColor=color;
 	}
 
 	@Override
@@ -74,7 +62,7 @@ public class ShapeImp implements Shape {
 
 	@Override
 	public void setFillColor(Color color) {
-		this.mFillColor = color;
+		this.mFillColor=color;
 	}
 
 	@Override
@@ -84,12 +72,12 @@ public class ShapeImp implements Shape {
 
 	@Override
 	public void draw(Graphics canvas) {
-		this.mCanvas = canvas;
+		this.canvas=(Graphics2D) canvas;
+	}
+	@Override
+	public Object clone() throws CloneNotSupportedException{
+		return null;
+		
 	}
 	
-	@Override 
-	public Object clone() throws CloneNotSupportedException {
-		return null;
-	}
-
 }
