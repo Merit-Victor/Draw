@@ -12,11 +12,18 @@ public class Rectangle extends ShapeImp {
         prop = new HashMap<>();
         prop.put("Width", 0.0);
         prop.put("Height", 0.0);
-        super.setProperties(prop);
+
     }
 
     @Override
     public void draw(Graphics canvas) {
+        if (canvas != null) {
+            ((Graphics2D) canvas).setColor(this.getFillColor());
 
+            canvas.fillRect(this.getPosition().x, this.getPosition().y, (this.getProperties().get("Width")).intValue(), (this.getProperties().get("Height")).intValue());
+            ((Graphics2D) canvas).setStroke(new BasicStroke(2));
+            ((Graphics2D) canvas).setColor(this.getColor());
+            canvas.drawRect(this.getPosition().x, this.getPosition().y, (this.getProperties().get("Width")).intValue(), (this.getProperties().get("Height")).intValue());
+        }
     }
 }

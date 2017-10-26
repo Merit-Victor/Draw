@@ -2,6 +2,7 @@ package Shapes;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import eg.edu.alexu.csd.oop.draw.DrawingEngine;
@@ -55,8 +56,15 @@ public class DrawingEngineImp implements DrawingEngine {
 
 	@Override
 	public Shape[] getShapes() {
-		Shape[] shapes = (Shape[])shapesList.toArray();
-		return shapes;
+        Shape[] shapes = new Shape[this.shapesList.size()];
+        Iterator itr = shapesList.iterator();
+        int index = 0;
+        while (itr.hasNext()) {
+            Shape element = (Shape) itr.next();
+            shapes[index] = element;
+            index++;
+        }
+        return shapes;
 	}
 
 	@Override

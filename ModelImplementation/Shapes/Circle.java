@@ -11,11 +11,18 @@ public class Circle extends ShapeImp {
     public Circle() {
         prop = new HashMap<>();
         prop.put("Radius", 0.0);
-        super.setProperties(prop);
+
     }
 
     @Override
     public void draw(Graphics canvas) {
+        if (canvas != null) {
+            ((Graphics2D) canvas).setColor(this.getFillColor());
 
+            canvas.fillArc(this.getPosition().x, this.getPosition().y, (this.getProperties().get("Radius")).intValue(), (this.getProperties().get("Radius")).intValue(), 0, 360);
+            ((Graphics2D) canvas).setStroke(new BasicStroke(2));
+            ((Graphics2D) canvas).setColor(this.getColor());
+            canvas.drawArc(this.getPosition().x, this.getPosition().y, (this.getProperties().get("Radius")).intValue(), (this.getProperties().get("Radius")).intValue(), 0, 360);
+        }
     }
 }
