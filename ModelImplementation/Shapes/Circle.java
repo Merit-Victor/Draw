@@ -1,5 +1,7 @@
 package Shapes;
 
+import Memento.State;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +13,9 @@ public class Circle extends ShapeImp {
     public Circle() {
         prop = new HashMap<>();
         prop.put("Radius", 0.0);
-
+        this.mState = State.added;
+        this.mUndoCommand = new UndoCommand();
+        this.mRedoCommand = new RedoCommand();
     }
 
     @Override

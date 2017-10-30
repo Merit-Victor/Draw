@@ -1,5 +1,7 @@
 package Shapes;
 
+import Memento.State;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +17,10 @@ public class Triangle extends ShapeImp {
 		prop.put("Firsty", 0.0);
 		prop.put("Secondx", 0.0);
 		prop.put("Secondy", 0.0);
-
-
-	}
+        this.mState = State.added;
+        this.mUndoCommand = new UndoCommand();
+        this.mRedoCommand = new RedoCommand();
+    }
 
     @Override
     public void draw(Graphics canvas) {

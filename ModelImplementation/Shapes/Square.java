@@ -1,5 +1,7 @@
 package Shapes;
 
+import Memento.State;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +13,9 @@ public class Square extends ShapeImp {
     public Square() {
         prop = new HashMap<>();
         prop.put("Length", 0.0);
-
+        this.mState = State.added;
+        this.mUndoCommand = new UndoCommand();
+        this.mRedoCommand = new RedoCommand();
     }
 
     @Override

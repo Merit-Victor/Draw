@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import Memento.*;
 import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.Shape;
 
@@ -15,17 +16,24 @@ public class DrawingEngineImp implements DrawingEngine {
 	 */
 	private List<Shape> shapesList;
 
+	private Caretaker mCaretaker;
+
+	private RemoteController mRemoteController;
+
 	/**
 	 * 
 	 */
 	public DrawingEngineImp() {
-		this.shapesList = new ArrayList<Shape>();
+		this.shapesList = new ArrayList<>();
+		this.mCaretaker = new Caretaker();
+		this.mRemoteController = new RemoteController(this, mCaretaker);
 	}
 
 	@Override
 	public void refresh(Graphics canvas) {
-		// TODO Auto-generated method stub
-
+		for (Shape shape : shapesList) {
+			shape.draw(canvas);
+		}
 	}
 
 	@Override
@@ -33,13 +41,19 @@ public class DrawingEngineImp implements DrawingEngine {
 		if (shape == null) {
 			throw new NullPointerException();
 		} else {
+			mCaretaker.addMemento(new Memento(new Action(State.added, shape)));
 			shapesList.add(shape);
 		}
 	}
 
 	@Override
 	public void removeShape(Shape shape) {
-		shapesList.remove(shape);
+		if (shape == null) {
+			throw new NullPointerException();
+		} else {
+			mCaretaker.addMemento(new Memento(new Action(State.removed, shape)));
+			shapesList.remove(shape);
+		}
 	}
 
 	@Override
@@ -49,6 +63,7 @@ public class DrawingEngineImp implements DrawingEngine {
 		} else {
 			int oldIndex;
 			oldIndex = shapesList.indexOf(oldShape);
+			mCaretaker.addMemento(new Memento(new Action(State.updated, oldShape, newShape)));
 			shapesList.remove(oldIndex);
 			shapesList.add(oldIndex, newShape);
 		}
@@ -75,14 +90,13 @@ public class DrawingEngineImp implements DrawingEngine {
 
 	@Override
 	public void undo() {
-		// TODO Auto-generated method stub
+		mRemoteController.rollBack();
 
 	}
 
 	@Override
 	public void redo() {
-		// TODO Auto-generated method stub
-
+		mRemoteController.stepForward();
 	}
 
 	@Override
@@ -96,5 +110,4 @@ public class DrawingEngineImp implements DrawingEngine {
 		// TODO Auto-generated method stub
 
 	}
-
 }

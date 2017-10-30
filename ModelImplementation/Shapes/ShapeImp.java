@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.Map;
 
+import Memento.Memento;
 import eg.edu.alexu.csd.oop.draw.Shape;
 
 public abstract class ShapeImp implements Shape, Cloneable {
@@ -15,6 +16,8 @@ public abstract class ShapeImp implements Shape, Cloneable {
 	private Color mOutlineColor;
 	private Color mFillColor;
 	private Graphics2D canvas;
+
+//	protected State mState;
 
 	@Override
 	public void setPosition(Point position) {
@@ -79,4 +82,20 @@ public abstract class ShapeImp implements Shape, Cloneable {
 	public Object clone() throws CloneNotSupportedException {
 		return this.clone();
 	}
+
+//	public Memento saveStateToMemento() {
+//		return new Memento(this.mState);
+//	}
+//
+//	public void getStateFromMemento(Memento memento) {
+//		this.mState = memento.getState();
+//	}
+//
+//	public State getState() {
+//		return this.mState;
+//	}
+//
+//	public void setState(State state) {
+//		this.mState = mState;
+//	}
 }

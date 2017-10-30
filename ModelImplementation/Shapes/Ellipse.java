@@ -1,5 +1,7 @@
 package Shapes;
 
+import Memento.State;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +14,9 @@ public class Ellipse extends ShapeImp {
         prop = new HashMap<>();
         prop.put("Semi-major axis", 0.0);
         prop.put("Semi-minor axis", 0.0);
-
+        this.mState = State.added;
+        this.mUndoCommand = new UndoCommand();
+        this.mRedoCommand = new RedoCommand();
     }
 
     @Override

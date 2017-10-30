@@ -1,5 +1,7 @@
 package Shapes;
 
+import Memento.State;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +14,10 @@ public class LineSegment extends ShapeImp {
 		prop = new HashMap<>();
 		prop.put("End point-x", 0.0);
 		prop.put("End point-y", 0.0);
-
-	}
+        this.mState = State.added;
+        this.mUndoCommand = new UndoCommand();
+        this.mRedoCommand = new RedoCommand();
+    }
 
     @Override
     public void draw(Graphics canvas) {
